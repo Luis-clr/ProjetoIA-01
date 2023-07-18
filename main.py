@@ -1,17 +1,17 @@
-import pygame
-import time
-import random
+import pygame #  biblioteca para criar jogos
+import time # biblioteca para controlar o tempo
+import random #bibloteca para gerar numeros aleatorios
 import math
 
 
 colors = (
     (255, 255, 255),  # Branco
-    (0, 0, 255),  # Azul
+    (0, 156, 0),  # verde escuro
     (255, 40, 0),  # Vermelho
-    (0, 255, 0),  # Verde
+    (0, 0, 255),  # Azul
     (0, 0, 0),  # Preto
     (139, 0, 0),  # Vermelho Escuro
-    (0, 0, 139),  # Azul Escuro
+    (0, 128, 0),  # Verde Escuro
     (255, 140, 0),  # Laranja Escuro
     (255, 69, 0),  # Laranja Avermelhado
     (255, 215, 0),  # Ouro
@@ -76,7 +76,7 @@ class Maze:
         time.sleep(self.genDelay[1])
 
         pygame.draw.rect(
-            self.display, colors[1],
+            self.display, colors[0],
             (vertice[0]+1, vertice[1]+1, pathWidth-2, pathWidth-2), 0
         )
         pygame.display.update()
@@ -107,7 +107,7 @@ class Maze:
 
         if destiny[0] == "left":
             pygame.draw.rect(
-                self.display, colors[1],
+                self.display, colors[0],
                 (
                     origin[0]-pathWidth+1, origin[1]+1,
                     2*pathWidth-1, pathWidth-1
@@ -117,14 +117,14 @@ class Maze:
 
         if destiny[0] == "right":
             pygame.draw.rect(
-                self.display, colors[1],
+                self.display, colors[0],
                 (origin[0]+1, origin[1]+1, 2*pathWidth-1, pathWidth-1), 0
             )
             pygame.display.update()
 
         if destiny[0] == "top":
             pygame.draw.rect(
-                self.display, colors[1],
+                self.display, colors[0],
                 (
                     origin[0]+1, origin[1]-pathWidth+1,
                     pathWidth-1, 2*pathWidth-1
@@ -134,7 +134,7 @@ class Maze:
 
         if destiny[0] == "bottom":
             pygame.draw.rect(
-                self.display, colors[1],
+                self.display, colors[0],
                 (origin[0]+1, origin[1]+1, pathWidth-1, 2*pathWidth-1), 0
             )
             pygame.display.update()
@@ -143,12 +143,12 @@ class Maze:
 
     def stepCount(self, textFont, endNStepsTitleArea_x, backtraking=0):
         numberStepsText = textFont.render(
-            str(self.numberSteps), True, colors[6]
+            str(self.numberSteps), True, colors[0]
         )
         ###
         numberStepsArea = numberStepsText.get_rect()
         pygame.draw.rect(
-            self.display, colors[0],
+            self.display, colors[4],
             (endNStepsTitleArea_x, 10, numberStepsArea[2], numberStepsArea[3])
         )
 
@@ -162,13 +162,13 @@ class Maze:
         if backtraking or digitIncrease:
             if self.numberBacktracking == 1 or digitIncrease:
                 numberBacktrackingTitle = textFont.render(
-                    'Número de Backtracking: ', True, colors[5]
+                    'Número de Backtracking: ', True, colors[0]
                 )
                 nBacktrackingTitleArea = numberBacktrackingTitle.get_rect()
 
                 endNStepsArea_x = endNStepsTitleArea_x + numberStepsArea[2]
                 pygame.draw.rect(
-                    self.display, colors[0],
+                    self.display, colors[4],
                     (
                         endNStepsArea_x, 10,
                         nBacktrackingTitleArea[2]+20, nBacktrackingTitleArea[3]
@@ -189,11 +189,11 @@ class Maze:
                 )
 
             numberBacktrackingText = textFont.render(
-                str(self.numberBacktracking), True, colors[5]
+                str(self.numberBacktracking), True, colors[0]
             )
             numBacktrackingArea = numberBacktrackingText.get_rect()
             pygame.draw.rect(
-                self.display, colors[0],
+                self.display, colors[4],
                 (
                     self.endNBacktrackingTitleArea_x, 10,
                     numBacktrackingArea[2], numBacktrackingArea[3]
@@ -208,7 +208,7 @@ class Maze:
         pygame.display.update()
 
     def speedButtons(self, textFont):
-        increaseSpeedButtonText = textFont.render('+SPEED', True, colors[0])
+        increaseSpeedButtonText = textFont.render('+SPEED', True, colors[4])
         iButtonText_W = increaseSpeedButtonText.get_width()
         self.iText_W = iButtonText_W
 
@@ -250,7 +250,7 @@ class Maze:
             increaseSpeedButtonText, (iButtonStart_X + 20, iButtonStart_Y + 2)
         )
 
-        decreaseSpeedButtonText = textFont.render('-', True, colors[0])
+        decreaseSpeedButtonText = textFont.render('-', True, colors[4])
         dButtonText_W = decreaseSpeedButtonText.get_width()
         self.dText_W = dButtonText_W
 
@@ -303,7 +303,7 @@ class Maze:
         )
         speedTitleArea = speedTitle.get_rect()
         pygame.draw.rect(
-            self.display, colors[0],
+            self.display, colors[4],
             (
                 iedButtonsArea-20-int(speedTitleNormal.get_width()), 10,
                 speedTitleNormal.get_width(), speedTitleNormal.get_height()
@@ -335,16 +335,16 @@ class Maze:
 
             for i in range(1, limit_x-1):
                 # Linhas da Esquerda
-                self.drawLine(colors[0], (x, y), (x, y + w))
+                self.drawLine(colors[4], (x, y), (x, y + w))
 
                 # Linhas do Topo
-                self.drawLine(colors[0], (x, y), (x + w, y))
+                self.drawLine(colors[4], (x, y), (x + w, y))
 
                 # Linhas de Baixo
-                self.drawLine(colors[0], (x, y + w), (x + w, y + w))
+                self.drawLine(colors[4], (x, y + w), (x + w, y + w))
 
                 # Linhas da Direita
-                self.drawLine(colors[0], (x + w, y), (x + w, y + w))
+                self.drawLine(colors[4], (x + w, y), (x + w, y + w))
 
                 # pygame.display.update()
 
@@ -363,7 +363,7 @@ class Maze:
 
         textFont = pygame.font.Font('./assets/fonts/Roboto-Bold.ttf', 17)
         numberStepsTitle = textFont.render(
-            'Número de Passos: ', True, colors[6]
+            'Número de Passos: ', True, colors[0]
         )
         numberStepsTitleArea = numberStepsTitle.get_rect()
         numberStepsTitleArea.center = (
@@ -450,7 +450,7 @@ class Maze:
         print("Apresentando solução...")
 
         pygame.draw.rect(
-            self.display, colors[0],
+            self.display, colors[4],
             (
                 self.speedStartArea_X, 10,
                 self.resolution[0] - self.speedStartArea_X, 23
@@ -480,7 +480,7 @@ class Maze:
         )
 
         titleFont = pygame.font.Font('./assets/fonts/Roboto-Bold.ttf', 40)
-        title = titleFont.render('aMaze', True, colors[0])
+        title = titleFont.render('Labirinto McMissil', True, colors[0])
         titleArea = title.get_rect()
         titleArea.center = (
             int(self.resolution[0]/2),
@@ -610,7 +610,7 @@ class Maze:
                             and gStart_Y <= mouse[1] <= gStart_Y + gText_H + 20
                         ):
                             ####
-                            self.display.fill(colors[0])
+                            self.display.fill(colors[4])
 
                             pygame.display.update()
 
@@ -648,7 +648,7 @@ def main():
 
     resolution = (800, 620)
 
-    pygame.display.set_caption("aMaze")
+    pygame.display.set_caption("Labirinto McMissil")
 
     icon = pygame.image.load('./assets/media/icon.png')
     pygame.display.set_icon(icon)
